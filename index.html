@@ -300,48 +300,7 @@ line-height: 1.6;
 <p>メールアドレス：pet.wankichi@gmail.com</p>
     </section>
 </footer>
-<!-- 注文フォーム -->
-<section id="order" style="padding:40px 20px; text-align:center; background:#fff8ed;">
 
-<h2>🐕 ジャーキーのご注文</h2>
-
-<p>20g単位でお好きな量をお選びいただけます。</p>
-<p>20g 600円（税込）・全国一律送料550円</p>
-
-<label>商品を選んでください</label><br>
-
-<select id="product">
-<option value="猪ジャーキー">🐗 猪ジャーキー</option>
-<option value="鹿ジャーキー">🦌 鹿ジャーキー</option>
-</select>
-
-<br><br>
-
-<label>希望するグラム数</label><br>
-<input type="number" id="grams" min="20" step="20" placeholder="20以上の数字"><br><br>
-
-<label>お名前</label><br>
-<input type="text" id="customerName" placeholder="お名前を入力"><br><br>
-<label>郵便番号</label><br>
-<input type="text" id="postalCode" placeholder="例：271-0092"><br><br>
-
-<label>ご住所</label><br>
-<input type="text" id="address" placeholder="お届け先の住所"><br><br>
-
-<label>電話番号</label><br>
-<input type="tel" id="phone" placeholder="電話番号"><br><br>
-
-<label>メールアドレス</label><br>
-<input type="email" id="email" placeholder="メールアドレス"><br><br>
-<p id="total">合計金額：600円～</p>
-
-<button type="button" onclick="sendOrder()">
-注文・お問い合わせ
-</button>
-
-<p id="message"></p>
-
-</section>
 
 <script>
 const gramsInput = document.getElementById("grams");
@@ -415,14 +374,38 @@ const body =
    "メールアドレス：" + email + "\n";
 
 
+const form = document.createElement("form");
+form.method = "POST";
+form.action = "https://script.google.com/macros/s/AKfycbxTA_OWDwdiWuCvGKiKVYuFyazz3ldYls_9S-3KUw2f8_qyHhWLLVYF-ZJl4eJZhkGS/exec";
+form.target = "orderFrame";
+ const input = document.createElement("input");
+input.type = "hidden";
+input.name = "payload";
+input.value = JSON.stringify({
+    product: product,
+    grams: grams,
+    price: price,
+    shipping: shipping,
+    total: total,
+    customerName: customerName,
+    postalCode: postalCode,
+    address: address,
+    phone: phone,
+    email: email
+});
 
-    window.open(
-    "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-    encodeURIComponent("pet.wankichi@gmail.com") +
-    "&su=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body),
-    "_blank"
-);
+form.appendChild(input);
+
+const frame = document.createElement("iframe");
+frame.name = "orderFrame";
+frame.style.display = "none";
+document.body.appendChild(frame);
+document.body.appendChild(form);
+
+form.submit();
+
+document.getElementById("message").textContent =
+    "注文を送信しました。ありがとうございました。";  
         
 }
 </script>

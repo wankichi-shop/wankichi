@@ -245,6 +245,50 @@ line-height: 1.6;
   </a>
 </p>
    <p>商品についてのご質問・ご注文は、こちらからお気軽にお問い合わせください。</p>
+<h2>ご注文フォーム</h2>
+
+<p>商品を選んで、お客様情報をご入力ください。</p>
+
+<p>商品：
+<select id="product">
+  <option value="猪ジャーキー">猪ジャーキー</option>
+  <option value="鹿ジャーキー">鹿ジャーキー</option>
+</select>
+</p>
+
+<p>注文量（20g単位・20g以上）：
+<input type="number" id="grams" min="20" step="20" value="20">
+</p>
+
+<p id="total">合計金額：1,150円～</p>
+
+<h3>お客様情報</h3>
+
+<p>お名前：
+<input type="text" id="customerName" required>
+</p>
+
+<p>郵便番号：
+<input type="text" id="postalCode" required>
+</p>
+
+<p>住所：
+<input type="text" id="address" required>
+</p>
+
+<p>電話番号：
+<input type="tel" id="phone" required>
+</p>
+
+<p>メールアドレス：
+<input type="email" id="email" required>
+</p>
+
+<p>
+<button type="button" onclick="sendOrder()">注文する</button>
+</p>
+
+<p id="message"></p>
 </section>
 <p>日本郵便</p>
 

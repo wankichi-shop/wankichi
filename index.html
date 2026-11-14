@@ -257,7 +257,9 @@ line-height: 1.6;
 </p>
 
 <p>注文量（20g単位・20g以上）：
+<button type="button" onclick="document.getElementById('grams').stepDown(); document.getElementById('grams').dispatchEvent(new Event('input',{bubbles:true}))">－</button>
 <input type="number" id="grams" min="20" step="20" value="20">
+<button type="button" onclick="document.getElementById('grams').stepUp(); document.getElementById('grams').dispatchEvent(new Event('input',{bubbles:true}))">＋</button>
 </p>
 
 <p id="total">合計金額：1,150円～</p>

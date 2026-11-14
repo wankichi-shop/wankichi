@@ -256,11 +256,13 @@ line-height: 1.6;
 </select>
 </p>
 
-<p>注文量（20g単位・20g以上）：
+<p>注文量（20g単位・20g以上）：</p>
+<div style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:nowrap;">
 <button type="button" onclick="document.getElementById('grams').stepDown(); document.getElementById('grams').dispatchEvent(new Event('input',{bubbles:true}))">－</button>
-<input type="number" id="grams" min="20" step="20" value="20">
+<input type="number" id="grams" min="20" step="20" value="20" style="width:100px; text-align:center;">
 <button type="button" onclick="document.getElementById('grams').stepUp(); document.getElementById('grams').dispatchEvent(new Event('input',{bubbles:true}))">＋</button>
-</p>
+<span>g</span>
+</div>
 
 <p id="total">合計金額：1,150円～</p>
 

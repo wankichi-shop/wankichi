@@ -521,7 +521,7 @@ const list = document.getElementById("topics-list");
 
     const files = await response.json();
     const articles = files.filter(file => file.name.endsWith(".md"));
-
+articles.sort((a, b) => b.name.localeCompare(a.name));
     if (articles.length === 0) {
       list.textContent = "現在、お知らせはありません。";
       return;

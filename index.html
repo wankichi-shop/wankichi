@@ -504,7 +504,10 @@ document.getElementById("message").textContent =
     </a>
   </p>
 </div>
-const response = await fetch(
+<script>
+async function loadTopics() {
+    try {
+    const response = await fetch(
       "https://api.github.com/repos/wankichi-shop/wankichi/contents/topics"
     );
 

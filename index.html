@@ -546,16 +546,45 @@ const list = document.getElementById("topics-list");
       card.style.cssText = "padding:18px;border-bottom:1px solid #ddd;";
 
       const title = document.createElement("h3");
-      title.textContent = get("title");
 
-      const date = document.createElement("p");
-      date.textContent = get("date");
+const titleButton = document.createElement("button");
+titleButton.type = "button";
+titleButton.textContent = get("title");
 
-      const summary = document.createElement("p");
-      summary.textContent = get("summary");
+titleButton.style.cssText =
+    "background:none;border:none;color:#44352b;font-size:22px;font-weight:bold;cursor:pointer;";
 
-      card.append(date, title, summary);
-      list.appendChild(card);
+title.appendChild(titleButton);
+
+const date = document.createElement("p");
+date.textContent = get("date");
+
+const summary = document.createElement("p");
+summary.textContent = get("summary");
+
+// 記事全文を取得
+const article = document.createElement("div");
+
+article.textContent = text.replace(
+    /^---\s*[\r\n]+[\s\S]*?[\r\n]+---\s*/,
+    ""
+).trim();
+ // 記事全文の表示設定
+article.style.display = "none";
+article.style.whiteSpace = "pre-wrap";
+article.style.padding = "15px";
+article.style.background = "#fffaf2";
+article.style.marginTop = "10px";
+
+// タイトルをクリックすると全文を表示
+titleButton.addEventListener("click", function() {
+    article.style.display =
+        article.style.display === "none" ? "block" : "none";
+});
+
+// カードに記事を追加
+card.append(date, title, summary, article);
+list.appendChild(card);  
     }
   } catch (error) {
     list.textContent = "お知らせを読み込めませんでした。";

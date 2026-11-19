@@ -560,8 +560,13 @@ const date = document.createElement("p");
 date.textContent = get("date");
 
 const summary = document.createElement("p");
-summary.textContent = get("summary");
-
+// 記事の写真を表示
+const imagePath = get("image");
+const topicImage = document.createElement("img");
+topicImage.src = imagePath;
+topicImage.alt = get("title");
+topicImage.style.cssText =
+"display:block;max-width:90%;width:500px;height:auto;margin:20px auto;border-radius:15px;";
 // 記事全文を取得
 const article = document.createElement("div");
 
@@ -589,7 +594,9 @@ readMore.addEventListener("click", function() {
 });
 
 // カードに記事を追加
-card.append(date, title, summary, readMore, article);
+card.append(date, title, summary);
+if (imagePath) card.appendChild(topicImage);
+card.append(readMore, article);
 list.appendChild(card);  
     }
   } catch (error) {

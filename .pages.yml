@@ -1,0 +1,42 @@
+media:
+  input: images/topics
+  output: /wankichi/images/topics
+  rename: safe
+  categories: [image]
+
+content:
+  - name: topics
+    label: わんきちトピックス
+    type: collection
+    path: topics
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+
+      - name: date
+        label: 投稿日
+        type: date
+        required: true
+
+      - name: summary
+        label: 短い紹介文
+        type: text
+
+      - name: image
+        label: 写真
+        type: image
+
+      - name: body
+        label: 記事本文
+        type: rich-text

@@ -510,7 +510,8 @@ document.getElementById("message").textContent =
   </p>
 </div>
 <script>
-async function loadTopics() {
+const list = document.getElementById("topics-list");
+    async function loadTopics() {
     try {
     const response = await fetch(
       "https://api.github.com/repos/wankichi-shop/wankichi/contents/topics"

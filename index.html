@@ -576,14 +576,20 @@ article.style.padding = "15px";
 article.style.background = "#fffaf2";
 article.style.marginTop = "10px";
 
-// タイトルをクリックすると全文を表示
-titleButton.addEventListener("click", function() {
-    article.style.display =
-        article.style.display === "none" ? "block" : "none";
+// 「続きを読む」ボタン
+const readMore = document.createElement("button");
+readMore.textContent = "続きを読む ▼";
+readMore.style.cssText =
+  "display:block;margin:15px auto;background:#8b7355;color:white;border:none;padding:10px 25px;border-radius:20px;font-size:16px;cursor:pointer;";
+
+readMore.addEventListener("click", function() {
+    const isHidden = article.style.display === "none";
+    article.style.display = isHidden ? "block" : "none";
+    readMore.textContent = isHidden ? "閉じる ▲" : "続きを読む ▼";
 });
 
 // カードに記事を追加
-card.append(date, title, summary, article);
+card.append(date, title, summary, readMore, article);
 list.appendChild(card);  
     }
   } catch (error) {

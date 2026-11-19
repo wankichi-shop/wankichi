@@ -520,8 +520,27 @@ const list = document.getElementById("topics-list");
     if (!response.ok) throw new Error("記事を取得できません");
 
     const files = await response.json();
-    const articles = files.filter(file => file.name.endsWith(".md"));
-articles.sort((a, b) => b.name.localeCompare(a.name));
+ const articles = await Promise.all(
+  files.filter(file => file.name.endsWith(".md")).map(async file => {
+    const commitResponse = await fetch(
+      `https://api.github.com/repos/wankichi-shop/wankichi/commits?path=${encodeURIComponent(file.path)}&per_page=1`
+    );
+
+    if (!commitResponse.ok) {
+      return { ...file, sortDate: 0 };
+    }
+
+    const commits = await commitResponse.json();
+    const date = commits[0]?.commit?.committer?.date || "";
+
+    return {
+      ...file,
+      sortDate: date ? new Date(date).getTime() : 0
+    };
+  })
+);
+
+articles.sort((a, b) => b.sortDate - a.sortDate);
     if (articles.length === 0) {
       list.textContent = "現在、お知らせはありません。";
       return;
